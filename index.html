@@ -2,32 +2,39 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#667eea">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <title>📱 محل الموبايلات</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; -webkit-tap-highlight-color: transparent; }
+
+  html { font-size: 16px; }
 
   body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
-    padding: 20px;
+    padding: 16px;
     color: #333;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+    padding-bottom: 80px;
   }
 
-  header { text-align: center; color: white; margin-bottom: 25px; }
-  header h1 { font-size: 2rem; margin-bottom: 5px; }
-  header p { opacity: 0.9; }
+  header { text-align: center; color: white; margin-bottom: 20px; }
+  header h1 { font-size: 1.7rem; margin-bottom: 5px; }
+  header p { opacity: 0.9; font-size: 0.9rem; }
 
   main {
     max-width: 950px;
     margin: 0 auto;
     background: white;
     border-radius: 16px;
-    padding: 25px;
+    padding: 20px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.2);
   }
 
-  .form-section h2 { margin-bottom: 15px; color: #667eea; font-size: 1.3rem; }
+  .form-section h2 { margin-bottom: 15px; color: #667eea; font-size: 1.2rem; }
 
   .form-grid {
     display: grid;
@@ -35,33 +42,36 @@
     gap: 10px;
   }
   .form-grid input {
-    padding: 12px;
+    padding: 14px;
     border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 1rem;
+    border-radius: 10px;
+    font-size: 16px;
     transition: border 0.2s;
     font-family: inherit;
+    width: 100%;
+    background: #fafafa;
   }
-  .form-grid input:focus { outline: none; border-color: #667eea; }
+  .form-grid input:focus { outline: none; border-color: #667eea; background: white; }
   .form-grid .full { grid-column: 1 / -1; }
 
   .form-buttons { margin-top: 12px; display: flex; gap: 10px; }
   button {
-    padding: 12px 24px;
+    padding: 14px 20px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 1rem;
     cursor: pointer;
     font-weight: bold;
     transition: transform 0.15s, opacity 0.2s;
     font-family: inherit;
+    min-height: 48px;
   }
-  button:hover { transform: translateY(-2px); }
+  button:active { transform: scale(0.97); }
   #submit-btn { background: #667eea; color: white; flex: 1; }
   #cancel-btn { background: #e0e0e0; color: #333; }
 
   .search-section {
-    margin: 25px 0 15px;
+    margin: 20px 0 15px;
     display: flex;
     gap: 10px;
     align-items: center;
@@ -71,10 +81,12 @@
     padding: 14px;
     border: 2px solid #e0e0e0;
     border-radius: 10px;
-    font-size: 1rem;
+    font-size: 16px;
     font-family: inherit;
+    width: 100%;
+    background: #fafafa;
   }
-  #search:focus { outline: none; border-color: #667eea; }
+  #search:focus { outline: none; border-color: #667eea; background: white; }
   #count {
     background: #667eea;
     color: white;
@@ -84,30 +96,42 @@
     white-space: nowrap;
   }
 
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  .stat-card {
+    background: #f0f3ff;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  .stat-card .label { font-size: 0.8rem; color: #666; margin-bottom: 4px; }
+  .stat-card .value { font-size: 1.1rem; font-weight: bold; color: #667eea; }
+
   #items-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 15px;
+    gap: 12px;
   }
 
   .item-card {
     background: #f8f9ff;
     border: 2px solid #e8ecff;
     border-radius: 12px;
-    padding: 16px;
+    padding: 15px;
     transition: transform 0.15s, box-shadow 0.2s;
   }
-  .item-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(102,126,234,0.2);
-  }
-  .item-card h3 { color: #4a5568; margin-bottom: 6px; font-size: 1.1rem; }
+  .item-card h3 { color: #4a5568; margin-bottom: 6px; font-size: 1.05rem; }
   .item-card .brand { color: #667eea; font-weight: bold; font-size: 0.9rem; margin-bottom: 8px; }
   .item-card .info { font-size: 0.9rem; color: #555; margin: 4px 0; }
-  .item-card .price { color: #38a169; font-weight: bold; font-size: 1.1rem; }
+  .item-card .price { color: #38a169; font-weight: bold; font-size: 1.05rem; }
+  .item-card .total { color: #667eea; font-weight: bold; font-size: 0.9rem; margin-top: 4px; }
   .item-card .desc { font-size: 0.85rem; color: #888; margin-top: 8px; font-style: italic; }
   .item-card .actions { display: flex; gap: 8px; margin-top: 12px; }
-  .item-card .actions button { flex: 1; padding: 8px; font-size: 0.85rem; }
+  .item-card .actions button { flex: 1; padding: 10px; font-size: 0.85rem; min-height: 42px; }
   .btn-edit { background: #f6ad55; color: white; }
   .btn-delete { background: #fc8181; color: white; }
 
@@ -123,18 +147,41 @@
     transform: translateX(-50%) translateY(100px);
     background: #38a169;
     color: white;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border-radius: 30px;
     font-size: 0.9rem;
     transition: transform 0.3s;
     z-index: 100;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   }
   .save-indicator.show { transform: translateX(-50%) translateY(0); }
 
+  .backup-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    padding: 10px 16px;
+    display: flex;
+    gap: 8px;
+    z-index: 50;
+  }
+  .backup-bar button {
+    flex: 1;
+    padding: 12px;
+    font-size: 0.85rem;
+    min-height: 44px;
+  }
+  .btn-export { background: #48bb78; color: white; }
+  .btn-import { background: #4299e1; color: white; }
+
   @media (max-width: 600px) {
     .form-grid { grid-template-columns: 1fr; }
-    header h1 { font-size: 1.5rem; }
-    main { padding: 18px; }
+    header h1 { font-size: 1.4rem; }
+    main { padding: 15px; }
+    body { padding: 12px; padding-bottom: 80px; }
   }
 </style>
 </head>
@@ -146,15 +193,14 @@
 </header>
 
 <main>
-  <!-- فورم الإضافة والتعديل -->
   <section class="form-section">
     <h2 id="form-title">➕ إضافة صنف جديد</h2>
-    <form id="item-form">
+    <form id="item-form" autocomplete="off">
       <div class="form-grid">
         <input type="text" id="name" placeholder="اسم الصنف (مثال: iPhone 13)" required>
         <input type="text" id="brand" placeholder="الماركة (مثال: Apple)" required>
-        <input type="number" id="price" placeholder="السعر (جنيه)" required min="0">
-        <input type="number" id="quantity" placeholder="الكمية" required min="0">
+        <input type="number" id="price" placeholder="السعر (جنيه)" required min="0" inputmode="decimal" step="any">
+        <input type="number" id="quantity" placeholder="الكمية" required min="0" inputmode="numeric" step="1">
         <input type="text" id="description" placeholder="وصف (اختياري)" class="full">
       </div>
       <div class="form-buttons">
@@ -164,23 +210,37 @@
     </form>
   </section>
 
-  <!-- البحث -->
   <section class="search-section">
     <input type="text" id="search" placeholder="🔍 ابحث بالاسم أو الماركة...">
     <span id="count">0 صنف</span>
   </section>
 
-  <!-- قائمة الأصناف -->
+  <section class="stats">
+    <div class="stat-card">
+      <div class="label">📦 عدد الأصناف</div>
+      <div class="value" id="stat-items">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">💰 إجمالي القيمة</div>
+      <div class="value" id="stat-value">0 جنيه</div>
+    </div>
+  </section>
+
   <section id="items-list"></section>
 </main>
 
 <div class="save-indicator" id="save-indicator">✅ تم الحفظ</div>
 
+<div class="backup-bar">
+  <button class="btn-export" id="export-btn">📤 تصدير نسخة</button>
+  <button class="btn-import" id="import-btn">📥 استيراد نسخة</button>
+  <input type="file" id="import-file" accept=".json" class="hidden">
+</div>
+
 <script>
 (function () {
   'use strict';
 
-  // ===== التخزين =====
   const STORAGE_KEY = 'mobile_shop_items';
 
   function loadItems() {
@@ -200,14 +260,12 @@
   function showSaveIndicator() {
     const el = document.getElementById('save-indicator');
     el.classList.add('show');
-    setTimeout(() => el.classList.remove('show'), 1500);
+    setTimeout(function () { el.classList.remove('show'); }, 1500);
   }
 
-  // ===== الحالة =====
   let items = loadItems();
   let editingId = null;
 
-  // ===== العناصر =====
   const form = document.getElementById('item-form');
   const formTitle = document.getElementById('form-title');
   const submitBtn = document.getElementById('submit-btn');
@@ -220,15 +278,27 @@
   const priceInput = document.getElementById('price');
   const quantityInput = document.getElementById('quantity');
   const descInput = document.getElementById('description');
+  const statItems = document.getElementById('stat-items');
+  const statValue = document.getElementById('stat-value');
 
-  // ===== الحماية من HTML =====
   function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
   }
 
-  // ===== العرض =====
+  function formatNum(n) {
+    return Number(n).toLocaleString('ar-EG');
+  }
+
+  function updateStats() {
+    statItems.textContent = items.length;
+    const total = items.reduce(function (sum, i) {
+      return sum + (Number(i.price) * Number(i.quantity));
+    }, 0);
+    statValue.textContent = formatNum(total) + ' جنيه';
+  }
+
   function renderItems(filter) {
     filter = filter || '';
     const query = filter.trim().toLowerCase();
@@ -246,15 +316,18 @@
           '<div class="icon">📦</div>' +
           '<p>' + (query ? 'مفيش نتائج للبحث' : 'لسه مفيش أصناف. أضف أول صنف!') + '</p>' +
         '</div>';
+      updateStats();
       return;
     }
 
     itemsList.innerHTML = filtered.map(function (item) {
+      const total = Number(item.price) * Number(item.quantity);
       return '<div class="item-card">' +
         '<h3>' + escapeHtml(item.name) + '</h3>' +
         '<div class="brand">' + escapeHtml(item.brand) + '</div>' +
-        '<div class="info price">💰 ' + item.price + ' جنيه</div>' +
-        '<div class="info">📦 الكمية: ' + item.quantity + '</div>' +
+        '<div class="info price">💰 ' + formatNum(item.price) + ' جنيه</div>' +
+        '<div class="info">📦 الكمية: ' + formatNum(item.quantity) + '</div>' +
+        '<div class="total">💵 الإجمالي: ' + formatNum(total) + ' جنيه</div>' +
         (item.description ? '<div class="desc">' + escapeHtml(item.description) + '</div>' : '') +
         '<div class="actions">' +
           '<button class="btn-edit" data-action="edit" data-id="' + item.id + '">✏️ تعديل</button>' +
@@ -262,9 +335,10 @@
         '</div>' +
       '</div>';
     }).join('');
+
+    updateStats();
   }
 
-  // ===== إضافة / تعديل =====
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -288,9 +362,9 @@
     saveItems(items);
     form.reset();
     renderItems(searchInput.value);
+    nameInput.focus();
   });
 
-  // ===== أزرار التعديل والحذف (event delegation) =====
   itemsList.addEventListener('click', function (e) {
     const btn = e.target.closest('button[data-action]');
     if (!btn) return;
@@ -323,7 +397,6 @@
     }
   });
 
-  // ===== إلغاء التعديل =====
   function resetForm() {
     form.reset();
     editingId = null;
@@ -334,10 +407,91 @@
 
   cancelBtn.addEventListener('click', resetForm);
 
-  // ===== البحث =====
   searchInput.addEventListener('input', function (e) {
     renderItems(e.target.value);
   });
+
+  // ===== تصدير نسخة احتياطية =====
+  document.getElementById('export-btn').addEventListener('click', function () {
+    if (items.length === 0) {
+      alert('مفيش أصناف تتصدر');
+      return;
+    }
+    const dataStr = JSON.stringify(items, null, 2);
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const date = new Date().toISOString().slice(0, 10);
+    a.href = url;
+    a.download = 'اصناف-المحل-' + date + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showSaveIndicator();
+  });
+
+  // ===== استيراد نسخة احتياطية =====
+  const importBtn = document.getElementById('import-btn');
+  const importFile = document.getElementById('import-file');
+
+  importBtn.addEventListener('click', function () {
+    importFile.click();
+  });
+
+  importFile.addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      try {
+        const imported = JSON.parse(event.target.result);
+        if (!Array.isArray(imported)) throw new Error('ملف غير صالح');
+
+        if (confirm('هيتم استبدال كل الأصناف الحالية بـ ' + imported.length + ' صنف من الملف. متأكد؟')) {
+          items = imported;
+          saveItems(items);
+          renderItems(searchInput.value);
+          alert('✅ تم استيراد ' + imported.length + ' صنف بنجاح');
+        }
+      } catch (err) {
+        alert('❌ الملف مش صالح. تأكد إنه ملف نسخة احتياطية من الموقع ده.');
+      }
+      importFile.value = '';
+    };
+    reader.readAsText(file);
+  });
+
+  // ===== حل مشكلة لوحة المفاتيح على الموبايل =====
+  function setupMobileKeyboardFix() {
+    const allInputs = document.querySelectorAll('input[type="text"], input[type="number"]');
+
+    allInputs.forEach(function (input) {
+      input.addEventListener('focus', function () {
+        // نستنى الكيبورد يفتح بعدين نظبط الـ scroll
+        setTimeout(function () {
+          input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 350);
+      });
+
+      // منع الزوم لما المستخدم يدوس على الخانة
+      input.addEventListener('touchstart', function () {
+        document.body.style.zoom = '1';
+      });
+    });
+
+    // لما الكيبورد يقفل، نرجّع الصفحة لمكانها
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', function () {
+        if (window.visualViewport.height > window.innerHeight * 0.8) {
+          document.activeElement && document.activeElement.blur && document.activeElement.blur();
+        }
+      });
+    }
+  }
+
+  setupMobileKeyboardFix();
 
   // ===== التشغيل =====
   renderItems();
