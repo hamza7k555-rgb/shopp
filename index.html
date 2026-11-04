@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📱 محل الموبايلات</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+
+  body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+  }
+
+  header { text-align: center; color: white; margin-bottom: 25px; }
+  header h1 { font-size: 2rem; margin-bottom: 5px; }
+  header p { opacity: 0.9; }
+
+  main {
+    max-width: 950px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  }
+
+  .form-section h2 { margin-bottom: 15px; color: #667eea; font-size: 1.3rem; }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .form-grid input {
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border 0.2s;
+    font-family: inherit;
+  }
+  .form-grid input:focus { outline: none; border-color: #667eea; }
+  .form-grid .full { grid-column: 1 / -1; }
+
+  .form-buttons { margin-top: 12px; display: flex; gap: 10px; }
+  button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.15s, opacity 0.2s;
+    font-family: inherit;
+  }
+  button:hover { transform: translateY(-2px); }
+  #submit-btn { background: #667eea; color: white; flex: 1; }
+  #cancel-btn { background: #e0e0e0; color: #333; }
+
+  .search-section {
+    margin: 25px 0 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  #search {
+    flex: 1;
+    padding: 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+  #search:focus { outline: none; border-color: #667eea; }
+  #count {
+    background: #667eea;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  #items-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 15px;
+  }
+
+  .item-card {
+    background: #f8f9ff;
+    border: 2px solid #e8ecff;
+    border-radius: 12px;
+    padding: 16px;
+    transition: transform 0.15s, box-shadow 0.2s;
+  }
+  .item-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(102,126,234,0.2);
+  }
+  .item-card h3 { color: #4a5568; margin-bottom: 6px; font-size: 1.1rem; }
+  .item-card .brand { color: #667eea; font-weight: bold; font-size: 0.9rem; margin-bottom: 8px; }
+  .item-card .info { font-size: 0.9rem; color: #555; margin: 4px 0; }
+  .item-card .price { color: #38a169; font-weight: bold; font-size: 1.1rem; }
+  .item-card .desc { font-size: 0.85rem; color: #888; margin-top: 8px; font-style: italic; }
+  .item-card .actions { display: flex; gap: 8px; margin-top: 12px; }
+  .item-card .actions button { flex: 1; padding: 8px; font-size: 0.85rem; }
+  .btn-edit { background: #f6ad55; color: white; }
+  .btn-delete { background: #fc8181; color: white; }
+
+  .empty { text-align: center; padding: 40px 20px; color: #999; grid-column: 1 / -1; }
+  .empty .icon { font-size: 3rem; margin-bottom: 10px; }
+
+  .hidden { display: none; }
+
+  .save-indicator {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #38a169;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    transition: transform 0.3s;
+    z-index: 100;
+  }
+  .save-indicator.show { transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.5rem; }
+    main { padding: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📱 محل الموبايلات</h1>
+  <p>إدارة أصناف المحل</p>
+</header>
+
+<main>
+  <!-- فورم الإضافة والتعديل -->
+  <section class="form-section">
+    <h2 id="form-title">➕ إضافة صنف جديد</h2>
+    <form id="item-form">
+      <div class="form-grid">
+        <input type="text" id="name" placeholder="اسم الصنف (مثال: iPhone 13)" required>
+        <input type="text" id="brand" placeholder="الماركة (مثال: Apple)" required>
+        <input type="number" id="price" placeholder="السعر (جنيه)" required min="0">
+        <input type="number" id="quantity" placeholder="الكمية" required min="0">
+        <input type="text" id="description" placeholder="وصف (اختياري)" class="full">
+      </div>
+      <div class="form-buttons">
+        <button type="submit" id="submit-btn">إضافة الصنف</button>
+        <button type="button" id="cancel-btn" class="hidden">إلغاء</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- البحث -->
+  <section class="search-section">
+    <input type="text" id="search" placeholder="🔍 ابحث بالاسم أو الماركة...">
+    <span id="count">0 صنف</span>
+  </section>
+
+  <!-- قائمة الأصناف -->
+  <section id="items-list"></section>
+</main>
+
+<div class="save-indicator" id="save-indicator">✅ تم الحفظ</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ===== التخزين =====
+  const STORAGE_KEY = 'mobile_shop_items';
+
+  function loadItems() {
+    try {
+      const data = localStorage.getItem(STORAGE_KEY);
+      return data ? JSON.parse(data) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveItems(items) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    showSaveIndicator();
+  }
+
+  function showSaveIndicator() {
+    const el = document.getElementById('save-indicator');
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 1500);
+  }
+
+  // ===== الحالة =====
+  let items = loadItems();
+  let editingId = null;
+
+  // ===== العناصر =====
+  const form = document.getElementById('item-form');
+  const formTitle = document.getElementById('form-title');
+  const submitBtn = document.getElementById('submit-btn');
+  const cancelBtn = document.getElementById('cancel-btn');
+  const searchInput = document.getElementById('search');
+  const itemsList = document.getElementById('items-list');
+  const countEl = document.getElementById('count');
+  const nameInput = document.getElementById('name');
+  const brandInput = document.getElementById('brand');
+  const priceInput = document.getElementById('price');
+  const quantityInput = document.getElementById('quantity');
+  const descInput = document.getElementById('description');
+
+  // ===== الحماية من HTML =====
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // ===== العرض =====
+  function renderItems(filter) {
+    filter = filter || '';
+    const query = filter.trim().toLowerCase();
+
+    const filtered = items.filter(function (item) {
+      return item.name.toLowerCase().indexOf(query) !== -1 ||
+             item.brand.toLowerCase().indexOf(query) !== -1;
+    });
+
+    countEl.textContent = filtered.length + ' صنف';
+
+    if (filtered.length === 0) {
+      itemsList.innerHTML =
+        '<div class="empty">' +
+          '<div class="icon">📦</div>' +
+          '<p>' + (query ? 'مفيش نتائج للبحث' : 'لسه مفيش أصناف. أضف أول صنف!') + '</p>' +
+        '</div>';
+      return;
+    }
+
+    itemsList.innerHTML = filtered.map(function (item) {
+      return '<div class="item-card">' +
+        '<h3>' + escapeHtml(item.name) + '</h3>' +
+        '<div class="brand">' + escapeHtml(item.brand) + '</div>' +
+        '<div class="info price">💰 ' + item.price + ' جنيه</div>' +
+        '<div class="info">📦 الكمية: ' + item.quantity + '</div>' +
+        (item.description ? '<div class="desc">' + escapeHtml(item.description) + '</div>' : '') +
+        '<div class="actions">' +
+          '<button class="btn-edit" data-action="edit" data-id="' + item.id + '">✏️ تعديل</button>' +
+          '<button class="btn-delete" data-action="delete" data-id="' + item.id + '">🗑️ حذف</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  // ===== إضافة / تعديل =====
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const data = {
+      name: nameInput.value.trim(),
+      brand: brandInput.value.trim(),
+      price: Number(priceInput.value),
+      quantity: Number(quantityInput.value),
+      description: descInput.value.trim()
+    };
+
+    if (editingId) {
+      items = items.map(function (i) {
+        return i.id === editingId ? Object.assign({}, i, data) : i;
+      });
+      resetForm();
+    } else {
+      items.push(Object.assign({ id: Date.now() }, data));
+    }
+
+    saveItems(items);
+    form.reset();
+    renderItems(searchInput.value);
+  });
+
+  // ===== أزرار التعديل والحذف (event delegation) =====
+  itemsList.addEventListener('click', function (e) {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+
+    const id = Number(btn.getAttribute('data-id'));
+    const action = btn.getAttribute('data-action');
+
+    if (action === 'edit') {
+      const item = items.find(function (i) { return i.id === id; });
+      if (!item) return;
+
+      nameInput.value = item.name;
+      brandInput.value = item.brand;
+      priceInput.value = item.price;
+      quantityInput.value = item.quantity;
+      descInput.value = item.description || '';
+      editingId = id;
+
+      formTitle.textContent = '✏️ تعديل الصنف';
+      submitBtn.textContent = 'حفظ التعديل';
+      cancelBtn.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    if (action === 'delete') {
+      if (!confirm('متأكد إنك عايز تحذف الصنف ده؟')) return;
+      items = items.filter(function (i) { return i.id !== id; });
+      saveItems(items);
+      renderItems(searchInput.value);
+    }
+  });
+
+  // ===== إلغاء التعديل =====
+  function resetForm() {
+    form.reset();
+    editingId = null;
+    formTitle.textContent = '➕ إضافة صنف جديد';
+    submitBtn.textContent = 'إضافة الصنف';
+    cancelBtn.classList.add('hidden');
+  }
+
+  cancelBtn.addEventListener('click', resetForm);
+
+  // ===== البحث =====
+  searchInput.addEventListener('input', function (e) {
+    renderItems(e.target.value);
+  });
+
+  // ===== التشغيل =====
+  renderItems();
+})();
+</script>
+
+</body>
+</html>
