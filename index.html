@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -9,181 +10,182 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; -webkit-tap-highlight-color: transparent; }
 
-  html { font-size: 16px; }
+html { font-size: 16px; }
 
-  body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    padding: 16px;
-    color: #333;
-    -webkit-text-size-adjust: 100%;
-    overflow-x: hidden;
-    padding-bottom: 80px;
-  }
+body {
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+min-height: 100vh;
+padding: 16px;
+color: #333;
+-webkit-text-size-adjust: 100%;
+overflow-x: hidden;
+padding-bottom: 80px;
+}
 
-  header { text-align: center; color: white; margin-bottom: 20px; }
-  header h1 { font-size: 1.7rem; margin-bottom: 5px; }
-  header p { opacity: 0.9; font-size: 0.9rem; }
+header { text-align: center; color: white; margin-bottom: 20px; }
+header h1 { font-size: 1.7rem; margin-bottom: 5px; }
+header p { opacity: 0.9; font-size: 0.9rem; }
 
-  main {
-    max-width: 950px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 16px;
-    padding: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-  }
+main {
+max-width: 950px;
+margin: 0 auto;
+background: white;
+border-radius: 16px;
+padding: 20px;
+box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
 
-  .form-section h2 { margin-bottom: 15px; color: #667eea; font-size: 1.2rem; }
+.form-section h2 { margin-bottom: 15px; color: #667eea; font-size: 1.2rem; }
 
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  .form-grid input {
-    padding: 14px;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    font-size: 16px;
-    transition: border 0.2s;
-    font-family: inherit;
-    width: 100%;
-    background: #fafafa;
-  }
-  .form-grid input:focus { outline: none; border-color: #667eea; background: white; }
-  .form-grid .full { grid-column: 1 / -1; }
+.form-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+}
+.form-grid input {
+padding: 14px;
+border: 2px solid #e0e0e0;
+border-radius: 10px;
+font-size: 16px;
+transition: border 0.2s;
+font-family: inherit;
+width: 100%;
+background: #fafafa;
+}
+.form-grid input:focus { outline: none; border-color: #667eea; background: white; }
+.form-grid .full { grid-column: 1 / -1; }
 
-  .form-buttons { margin-top: 12px; display: flex; gap: 10px; }
-  button {
-    padding: 14px 20px;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    cursor: pointer;
-    font-weight: bold;
-    transition: transform 0.15s, opacity 0.2s;
-    font-family: inherit;
-    min-height: 48px;
-  }
-  button:active { transform: scale(0.97); }
-  #submit-btn { background: #667eea; color: white; flex: 1; }
-  #cancel-btn { background: #e0e0e0; color: #333; }
+.form-buttons { margin-top: 12px; display: flex; gap: 10px; }
+button {
+padding: 14px 20px;
+border: none;
+border-radius: 10px;
+font-size: 1rem;
+cursor: pointer;
+font-weight: bold;
+transition: transform 0.15s, opacity 0.2s;
+font-family: inherit;
+min-height: 48px;
+}
+button:active { transform: scale(0.97); }
+#submit-btn { background: #667eea; color: white; flex: 1; }
+#cancel-btn { background: #e0e0e0; color: #333; }
 
-  .search-section {
-    margin: 20px 0 15px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-  #search {
-    flex: 1;
-    padding: 14px;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    font-size: 16px;
-    font-family: inherit;
-    width: 100%;
-    background: #fafafa;
-  }
-  #search:focus { outline: none; border-color: #667eea; background: white; }
-  #count {
-    background: #667eea;
-    color: white;
-    padding: 8px 14px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    white-space: nowrap;
-  }
+.search-section {
+margin: 20px 0 15px;
+display: flex;
+gap: 10px;
+align-items: center;
+}
+#search {
+flex: 1;
+padding: 14px;
+border: 2px solid #e0e0e0;
+border-radius: 10px;
+font-size: 16px;
+font-family: inherit;
+width: 100%;
+background: #fafafa;
+}
+#search:focus { outline: none; border-color: #667eea; background: white; }
+#count {
+background: #667eea;
+color: white;
+padding: 8px 14px;
+border-radius: 20px;
+font-size: 0.85rem;
+white-space: nowrap;
+}
 
-  .stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 15px;
-  }
-  .stat-card {
-    background: #f0f3ff;
-    padding: 12px;
-    border-radius: 10px;
-    text-align: center;
-  }
-  .stat-card .label { font-size: 0.8rem; color: #666; margin-bottom: 4px; }
-  .stat-card .value { font-size: 1.1rem; font-weight: bold; color: #667eea; }
+.stats {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+margin-bottom: 15px;
+}
+.stat-card {
+background: #f0f3ff;
+padding: 12px;
+border-radius: 10px;
+text-align: center;
+}
+.stat-card .label { font-size: 0.8rem; color: #666; margin-bottom: 4px; }
+.stat-card .value { font-size: 1.1rem; font-weight: bold; color: #667eea; }
 
-  #items-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 12px;
-  }
+#items-list {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+gap: 12px;
+}
 
-  .item-card {
-    background: #f8f9ff;
-    border: 2px solid #e8ecff;
-    border-radius: 12px;
-    padding: 15px;
-    transition: transform 0.15s, box-shadow 0.2s;
-  }
-  .item-card h3 { color: #4a5568; margin-bottom: 6px; font-size: 1.05rem; }
-  .item-card .brand { color: #667eea; font-weight: bold; font-size: 0.9rem; margin-bottom: 8px; }
-  .item-card .info { font-size: 0.9rem; color: #555; margin: 4px 0; }
-  .item-card .price { color: #38a169; font-weight: bold; font-size: 1.05rem; }
-  .item-card .total { color: #667eea; font-weight: bold; font-size: 0.9rem; margin-top: 4px; }
-  .item-card .desc { font-size: 0.85rem; color: #888; margin-top: 8px; font-style: italic; }
-  .item-card .actions { display: flex; gap: 8px; margin-top: 12px; }
-  .item-card .actions button { flex: 1; padding: 10px; font-size: 0.85rem; min-height: 42px; }
-  .btn-edit { background: #f6ad55; color: white; }
-  .btn-delete { background: #fc8181; color: white; }
+.item-card {
+background: #f8f9ff;
+border: 2px solid #e8ecff;
+border-radius: 12px;
+padding: 15px;
+transition: transform 0.15s, box-shadow 0.2s;
+}
+.item-card h3 { color: #4a5568; margin-bottom: 6px; font-size: 1.05rem; }
+.item-card .brand { color: #667eea; font-weight: bold; font-size: 0.9rem; margin-bottom: 8px; }
+.item-card .info { font-size: 0.9rem; color: #555; margin: 4px 0; }
+.item-card .price { color: #38a169; font-weight: bold; font-size: 1.05rem; }
+.item-card .total { color: #667eea; font-weight: bold; font-size: 0.9rem; margin-top: 4px; }
+.item-card .desc { font-size: 0.85rem; color: #888; margin-top: 8px; font-style: italic; }
+.item-card .actions { display: flex; gap: 8px; margin-top: 12px; }
+.item-card .actions button { flex: 1; padding: 10px; font-size: 0.85rem; min-height: 42px; }
+.btn-edit { background: #f6ad55; color: white; }
+.btn-delete { background: #fc8181; color: white; }
 
-  .empty { text-align: center; padding: 40px 20px; color: #999; grid-column: 1 / -1; }
-  .empty .icon { font-size: 3rem; margin-bottom: 10px; }
+.empty { text-align: center; padding: 40px 20px; color: #999; grid-column: 1 / -1; }
+.empty .icon { font-size: 3rem; margin-bottom: 10px; }
 
-  .hidden { display: none; }
+.hidden { display: none; }
 
-  .save-indicator {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: #38a169;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 30px;
-    font-size: 0.9rem;
-    transition: transform 0.3s;
-    z-index: 100;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  }
-  .save-indicator.show { transform: translateX(-50%) translateY(0); }
+.save-indicator {
+position: fixed;
+bottom: 20px;
+left: 50%;
+transform: translateX(-50%) translateY(100px);
+background: #38a169;
+color: white;
+padding: 12px 24px;
+border-radius: 30px;
+font-size: 0.9rem;
+transition: transform 0.3s;
+z-index: 100;
+box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.save-indicator.show { transform: translateX(-50%) translateY(0); }
 
-  .backup-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: white;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
-    padding: 10px 16px;
-    display: flex;
-    gap: 8px;
-    z-index: 50;
-  }
-  .backup-bar button {
-    flex: 1;
-    padding: 12px;
-    font-size: 0.85rem;
-    min-height: 44px;
-  }
-  .btn-export { background: #48bb78; color: white; }
-  .btn-import { background: #4299e1; color: white; }
+.backup-bar {
+position: fixed;
+bottom: 0;
+left: 0;
+right: 0;
+background: white;
+box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+padding: 10px 16px;
+display: flex;
+gap: 8px;
+z-index: 50;
+}
+.backup-bar button {
+flex: 1;
+padding: 12px;
+font-size: 0.85rem;
+min-height: 44px;
+}
+.btn-export { background: #48bb78; color: white; }
+.btn-import { background: #4299e1; color: white; }
 
-  @media (max-width: 600px) {
-    .form-grid { grid-template-columns: 1fr; }
-    header h1 { font-size: 1.4rem; }
-    main { padding: 15px; }
-    body { padding: 12px; padding-bottom: 80px; }
-  }
+@media (max-width: 600px) {
+.form-grid { grid-template-columns: 1fr; }
+header h1 { font-size: 1.4rem; }
+main { padding: 15px; }
+body { padding: 12px; padding-bottom: 80px; }
+}
 </style>
+
 </head>
 <body>
 
@@ -463,7 +465,7 @@
     reader.readAsText(file);
   });
 
-  // ===== حل مشكلة لوحة المفاتيح على الموبايل =====
+  // ===== تحسين تجربة لوحة المفاتيح على الموبايل =====
   function setupMobileKeyboardFix() {
     const allInputs = document.querySelectorAll('input[type="text"], input[type="number"]');
 
@@ -474,21 +476,7 @@
           input.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 350);
       });
-
-      // منع الزوم لما المستخدم يدوس على الخانة
-      input.addEventListener('touchstart', function () {
-        document.body.style.zoom = '1';
-      });
     });
-
-    // لما الكيبورد يقفل، نرجّع الصفحة لمكانها
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', function () {
-        if (window.visualViewport.height > window.innerHeight * 0.8) {
-          document.activeElement && document.activeElement.blur && document.activeElement.blur();
-        }
-      });
-    }
   }
 
   setupMobileKeyboardFix();
